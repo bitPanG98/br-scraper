@@ -27,16 +27,16 @@ class BRScraperFunctions(unittest.TestCase):
         data = self.scraper.parse_tables(resource)
         self.assertTrue("team_pitching" in data)
         for row in data["team_pitching"]:
-            self.assertTrue("" in row)
-            if row[""] == "Greg Maddux":
+            self.assertTrue("Pos" in row)
+            if row["Pos"] == "Greg Maddux":
                 self.assertTrue("BB") in row
                 self.assertTrue(int(row["BB"]) == 23)
                 self.assertTrue("SO") in row
                 self.assertTrue(int(row["SO"]) == 181)
         self.assertTrue("team_batting" in data)
         for row in data["team_batting"]:
-            self.assertTrue("" in row)
-            if row[""] == "Javy Lopez":
+            self.assertTrue("Pos" in row)
+            if row["Pos"] == "Javy Lopez":
                 self.assertTrue("BB") in row
                 self.assertTrue(int(row["BB"]) == 14)
                 self.assertTrue("SO") in row
@@ -94,8 +94,8 @@ class BRScraperFunctions(unittest.TestCase):
     def test_mlb_year_standings(self):
         resource = "leagues/MLB/1981-standings.shtml"
         data = self.scraper.parse_tables(resource)
-        self.assertTrue("expanded_standings_overall" in data)
-        for row in data["expanded_standings_overall"]:
+        self.assertTrue("standings_E_overall" in data)
+        for row in data["standings_E_overall"]:
             self.assertTrue("Tm" in row)
             if row["Tm"] == "OAK":
                 self.assertTrue("L" in row)

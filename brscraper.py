@@ -27,7 +27,7 @@ class BRScraper:
 
         if isinstance(table_ids, str): table_ids = [table_ids]
 
-        soup = BeautifulSoup(urllib2.urlopen(self.server_url + resource))
+        soup = BeautifulSoup(urllib2.urlopen(self.server_url + resource),"html.parser")
         tables = soup.find_all(is_parseable_table)
         data = {}
 
