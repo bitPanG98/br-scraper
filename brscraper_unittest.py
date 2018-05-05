@@ -3,10 +3,8 @@ import brscraper
 import unittest
 
 class BRScraperFunctions(unittest.TestCase):
-    
     def setUp(self):
         self.scraper = brscraper.BRScraper()
-    
     def test_team(self):
         resource = "teams/ARI/"
         data = self.scraper.parse_tables(resource)
@@ -21,7 +19,6 @@ class BRScraperFunctions(unittest.TestCase):
             elif year == 2001:
                 self.assertTrue("R" in row)
                 self.assertTrue(int(row["R"]) == 818)
-    
     def test_team_year(self):
         resource = "teams/ATL/1995.shtml"
         data = self.scraper.parse_tables(resource)
@@ -41,7 +38,6 @@ class BRScraperFunctions(unittest.TestCase):
                 self.assertTrue(int(row["BB"]) == 14)
                 self.assertTrue("SO") in row
                 self.assertTrue(int(row["SO"]) == 57)
-                
     def test_team_year_schedule(self):
         resource = "teams/BOS/2004-schedule-scores.shtml"
         data = self.scraper.parse_tables(resource)
@@ -59,7 +55,6 @@ class BRScraperFunctions(unittest.TestCase):
                 self.assertTrue(row["Loss"] == "Brown")
                 self.assertTrue("Save" in row)
                 self.assertTrue(row["Save"] == "")
-    
     def test_player(self):
         resource = "players/m/martipe02.shtml"
         data = self.scraper.parse_tables(resource)
@@ -75,7 +70,6 @@ class BRScraperFunctions(unittest.TestCase):
                 self.assertTrue(int(row["BF"]) == 835)
                 self.assertTrue("W" in row)
                 self.assertTrue(int(row["W"]) == 23)
-    
     def test_manager(self):
         resource = "managers/aloufe01.shtml"
         data = self.scraper.parse_tables(resource)
@@ -90,7 +84,6 @@ class BRScraperFunctions(unittest.TestCase):
             elif year == 2000:
                 self.assertTrue("Tm" in row)
                 self.assertTrue(row["Tm"] == "Montreal Expos")
-    
     def test_mlb_year_standings(self):
         resource = "leagues/MLB/1981-standings.shtml"
         data = self.scraper.parse_tables(resource)
@@ -103,7 +96,6 @@ class BRScraperFunctions(unittest.TestCase):
             elif row["Tm"] == "SFG":
                 self.assertTrue("Lg" in row)
                 self.assertTrue(row["Lg"] == "NL")
-    
     def test_awards_year(self):
         resource = "awards/awards_1991.shtml"
         data = self.scraper.parse_tables(resource)
@@ -117,7 +109,5 @@ class BRScraperFunctions(unittest.TestCase):
                 self.assertTrue("Tm" in row)
                 self.assertTrue(row[""] == "Cal Ripken")
                 self.assertTrue(row["Tm"] == "BAL")
-    
-                            
 if __name__ == "__main__":
     unittest.main()
