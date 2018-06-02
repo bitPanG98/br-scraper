@@ -24,10 +24,22 @@ class BRScraper:
             return "league_average_table" not in tag["class"] and "stat_total" not in tag["class"]
 
         if isinstance(table_ids, str): table_ids = [table_ids]
+    
+      # Added this to attempt to fetch data from bref 3 times. Workaround to HTTP Error 502 that would
+      # randomly crop up. Looking online it seems that the issue was possibly due to a random load spike
+      # from bref's side that would stop us from connecting and crash the DataGenerator.py function from 
+      # running
 
-        soup = BeautifulSoup(urllib.request.urlopen(self.server_url + resource),"html.parser")
-        tables = soup.find_all(is_parseable_table)
-        data = {}
+        attempts = 0
+        while attempts < 3:
+            try:
+                soup = BeautifulSoup(urllib.request.urlopen(self.server_url + resource),"html.parser")
+                tables = soup.find_all(is_parseable_table)
+                data = {}
+                break
+            except HTTPError as e:
+                attempts += 1
+                print("HTTP Error {}".format(e.args[0], e.args[1]))
 
         # Read through each table, read headers as dictionary keys
         for table in tables:
