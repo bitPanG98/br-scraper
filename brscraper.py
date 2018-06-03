@@ -1,6 +1,6 @@
-
 from bs4 import BeautifulSoup
 import urllib.request
+from urllib.error import HTTPError
 
 class BRScraper:
     def __init__(self, server_url="http://www.baseball-reference.com/"):
@@ -24,7 +24,7 @@ class BRScraper:
             return "league_average_table" not in tag["class"] and "stat_total" not in tag["class"]
 
         if isinstance(table_ids, str): table_ids = [table_ids]
-    
+
       # Added this to attempt to fetch data from bref 3 times. Workaround to HTTP Error 502 that would
       # randomly crop up. Looking online it seems that the issue was possibly due to a random load spike
       # from bref's side that would stop us from connecting and crash the DataGenerator.py function from 
