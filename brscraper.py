@@ -39,7 +39,10 @@ class BRScraper:
                 break
             except HTTPError as e:
                 attempts += 1
+                tables=[]
+                data = {}
                 print("HTTP Error {}".format(e.args))
+                print(e)
 
         # Read through each table, read headers as dictionary keys
         for table in tables:
