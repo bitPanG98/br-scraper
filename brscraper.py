@@ -74,10 +74,13 @@ class BRScraper:
                 entries = row.find_all(["td","th"])
                 entry_data = []
                 for entry in entries:
-                    if (entry.text == None) or (entry.text == u""):
+                    entry_string = "".join(entry.strings)
+                    if entry_string == None:
+                        entry_data.append(u"")
+                    elif entry_string == "":
                         entry_data.append(u"");
                     else:
-                        entry_data.append(entry.text.strip())
+                        entry_data.append(entry_string.strip())
                 if len(entry_data) > 0:
                     data[table["id"]].append(dict(zip(header_names, entry_data)))
         return data
